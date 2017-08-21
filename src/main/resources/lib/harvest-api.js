@@ -12,17 +12,16 @@ var conf = {
 exports.request = function(params){
 	var siteConfig = libs.portal.getSiteConfig();
 	conf.account = siteConfig.account;
-	conf.user = siteConfig.user;
-	conf.pass = siteConfig.pass;
-	conf.auth = libs.encoding.base64Encode(conf.user + ':' + conf.pass);
+	conf.auth = libs.encoding.base64Encode(siteConfig.user + ':' + siteConfig.pass);
 
 	var response = libs.httpClient.request({
-		url: 'https://' + conf.account + '.harvestapp.com/' + params.endpoint,
+		url: 'https://' + conf.account + '.harvestapp.com/' + params.endpoint + '/',
 		method: 'GET',
 		headers: {
 			'Cache-Control': 'no-cache',
 			'Accept': conf.contentType,
-			'Authorization': conf.auth,
+			'Content-Type': conf.contentType,
+			'Authorization': 'Basic ' + conf.auth,
 			'User-Agent': 'Enonic XP - App: Harvest report (alpha)'
 		},
 		connectionTimeout: 5000,
