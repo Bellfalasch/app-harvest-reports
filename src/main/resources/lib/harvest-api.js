@@ -22,7 +22,8 @@ exports.request = function(params){
 		headers: {
 			'Cache-Control': 'no-cache',
 			'Accept': conf.contentType,
-			'Authorization': conf.auth
+			'Authorization': conf.auth,
+			'User-Agent': 'Enonic XP - App: Harvest report (alpha)'
 		},
 		connectionTimeout: 5000,
 		readTimeout: 5000,

@@ -23,6 +23,19 @@
 				</input>
 			</items>
 		</field-set>
+		<field-set name="oauth2">
+			<label>OAuth2</label>
+			<items>
+				<input name="clientId" type="TextLine">
+					<label>Client ID</label>
+					<occurrences minimum="0" maximum="1"/>
+				</input>
+				<input name="clientSecret" type="TextLine">
+					<label>Client Secret</label>
+					<occurrences minimum="0" maximum="1"/>
+				</input>
+			</items>
+		</field-set>
 	</config>
 
 	<mappings>
