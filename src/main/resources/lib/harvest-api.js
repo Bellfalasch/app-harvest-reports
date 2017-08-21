@@ -18,7 +18,7 @@ exports.request = function(params){
 
 	var response = libs.httpClient.request({
 		url: 'https://' + conf.account + '.harvestapp.com/' + params.endpoint,
-		method: 'POST',
+		method: 'GET',
 		headers: {
 			'Cache-Control': 'no-cache',
 			'Accept': conf.contentType,
