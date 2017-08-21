@@ -12,7 +12,7 @@ var conf = {
 exports.request = function(params){
 	var siteConfig = libs.portal.getSiteConfig();
 	conf.account = siteConfig.account;
-	conf.auth = libs.encoding.base64Encode(siteConfig.user + ':' + siteConfig.pass);
+	conf.auth = libs.encoding.base64Encode(siteConfig.user + ':' + siteConfig.password);
 
 	var response = libs.httpClient.request({
 		url: 'https://' + conf.account + '.harvestapp.com/' + params.endpoint + '/',
