@@ -14,20 +14,20 @@ exports.request = function(params){
 	conf.account = siteConfig.account;
 	conf.auth = libs.encoding.base64Encode(siteConfig.user + ':' + siteConfig.password);
 
-	var response = libs.httpClient.request({
-		url: 'https://' + conf.account + '.harvestapp.com/' + params.endpoint + '/',
+	var params = {
+		url: 'https://' + conf.account + '.harvestapp.com/' + params.endpoint + '',
 		method: 'GET',
 		headers: {
 			'Cache-Control': 'no-cache',
 			'Accept': conf.contentType,
 			'Content-Type': conf.contentType,
-			'Authorization': 'Basic ' + conf.auth,
-			'User-Agent': 'Enonic XP - App: Harvest report (alpha)'
-		},
-		connectionTimeout: 5000,
-		readTimeout: 5000,
-		contentType: conf.contentType
-	});
+			'Authorization': 'Basic ' + conf.auth
+		}
+	};
+	log.info("REQUEST:");
+	libs.util.log(params);
+	log.info("RESPONSE:");
+	var response = libs.httpClient.request(params);
 
 	libs.util.log(response);
 };
