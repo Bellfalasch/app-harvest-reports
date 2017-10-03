@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title data-th-text="${appName}"></title>
+
+    <!-- Common style and library used by the Launcher Panel -->
+    <link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/common/styles/_all.css'}">
+    <script type="text/javascript" data-th-src="${assetsUrl + '/common/lib/_all.js'}"></script>
+
+    <!-- App bar style -->
+    <link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/styles/toolstarter.css'}">
+</head>
+<body>
+
+<!-- App bar -->
+<div class="app-bar">
+    <div class="app-button">
+        <img class="app-icon" data-th-src="${assetsUrl + '/icons/application.svg'}"/>
+        <span class="app-title">Harvest</span>
+    </div>
+</div>
+
+<!-- Appends the Launcher Panel to the document body -->
+<script>
+    var CONFIG = {
+        adminUrl: '{{adminUrl}}',
+		assetsUri: '{{assetsUri}}',
+        appId: '{{appId}}'
+    };
+</script>
+<script type="text/javascript" data-th-src="${assetsUrl} + '/apps/launcher/js/_all.js'" async></script>
+</body>
+</html>
