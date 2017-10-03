@@ -26,10 +26,22 @@ exports.request = function(params){
 		readTimeout: 3000,
 		contentType: conf.contentType
 	};
+
 	log.info("REQUEST:");
 	libs.util.log(params);
+
 	log.info("RESPONSE:");
 	var response = libs.httpClient.request(params);
-
 	libs.util.log(response);
+
+	log.info(response.status);
+	var json = null;
+	if (response.status === 200) {
+		if (response.body !== null) {
+			json = response.body;
+			json = JSON.parse(json);
+			libs.util.log(json);
+		}
+	}
+
 };
