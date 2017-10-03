@@ -9,7 +9,7 @@ var conf = {
 	contentType: 'application/json'
 };
 
-exports.request = function(params){
+function request(params) {
 	var siteConfig = libs.portal.getSiteConfig();
 	conf.token = siteConfig.token;
 	conf.account = siteConfig.account;
@@ -44,4 +44,23 @@ exports.request = function(params){
 		}
 	}
 
+}
+
+// We need to wrap functionality into services to be able to control access better since services exposes URL endpoints by default.
+exports.clients = function() {
+	request({
+		'endpoint': 'clients'
+	});
+};
+
+exports.contacts = function() {
+	request({
+		'endpoint': 'contacts'
+	});
+};
+
+exports.projects = function() {
+	request({
+		'endpoint': 'projects'
+	});
 };

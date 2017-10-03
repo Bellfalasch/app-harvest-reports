@@ -1,9 +1,9 @@
 var libs = {
 	portal: require('/lib/xp/portal'),
 	util: require('/lib/enonic/util'),
-	clients: require('/lib/clients')
+	harvest: require('/lib/harvest-api')
 };
 
 exports.get = function() {
-	libs.clients.all();
+	libs.harvest.clients();
 }
