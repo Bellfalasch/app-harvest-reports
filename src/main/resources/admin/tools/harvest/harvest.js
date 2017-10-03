@@ -1,14 +1,12 @@
 var libs = {
 	portal: require('/lib/xp/portal'),
-	thymeleaf: require('/lib/xp/thymeleaf'),
-//	local: require('/lib/local'),
+	thymeleaf: require('/lib/xp/thymeleaf')
 }
 
 var timestamp = Date.now();
 
 exports.get = function(req) {
     var view = resolve('harvest.html');
-//	var xpVersion = libs.local.getXpVersion();
 
     // Variables required by the Launcher Panel
     var adminUrl = libs.portal.url({path: '/admin'})
