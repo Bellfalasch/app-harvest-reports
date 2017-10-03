@@ -64,3 +64,9 @@ exports.projects = function() {
 		'endpoint': 'projects'
 	});
 };
+
+exports.time_entries = function() {
+	request({
+		'endpoint': 'time_entries'
+	});
+};

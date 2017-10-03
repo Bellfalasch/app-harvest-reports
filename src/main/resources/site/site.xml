@@ -26,5 +26,8 @@
 		<mapping controller="/services/projects/projects.js" order="10">
 			<pattern>/harvest/projects</pattern>
 		</mapping>
+		<mapping controller="/services/entries/entries.js" order="10">
+			<pattern>/harvest/entries</pattern>
+		</mapping>
 	</mappings>
 </site>
