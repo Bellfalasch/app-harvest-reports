@@ -18,15 +18,12 @@ exports.request = function(params){
 		url: 'https://api.harvestapp.com/v2/' + params.endpoint + '/',
 		method: 'GET',
 		headers: {
-			'Cache-Control': 'no-cache',
-			'Accept': conf.contentType,
 			'Authorization': 'Bearer ' + conf.token,
 			'Harvest-Account-Id': conf.account,
-			'User-Agent': 'Enonic XP - App: Harvest report (alpha)',
-			'Content-Type': conf.contentType + '; charset=utf-8'
+			'User-Agent': 'Enonic XP - App: Harvest report (alpha)'
 		},
-		connectionTimeout: 5000,
-		readTimeout: 5000,
+		connectionTimeout: 3000,
+		readTimeout: 3000,
 		contentType: conf.contentType
 	};
 	log.info("REQUEST:");
