@@ -1,37 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
 	<config>
-		<field-set name="basics">
-			<label>Basics</label>
+		<field-set name="token">
+			<label>API v2 - Personal Token</label>
 			<items>
-				<input name="url" type="TextLine">
-					<label>Account root URL</label>
+				<input name="token" type="TextLine">
+					<label>Token</label>
 					<occurrences minimum="0" maximum="1"/>
 				</input>
-			</items>
-		</field-set>
-		<field-set name="credentials">
-			<label>Credentials</label>
-			<items>
-				<input name="user" type="TextLine">
-					<label>User (email)</label>
-					<occurrences minimum="0" maximum="1"/>
-				</input>
-				<input name="password" type="TextLine">
-					<label>Password</label>
-					<occurrences minimum="0" maximum="1"/>
-				</input>
-			</items>
-		</field-set>
-		<field-set name="oauth2">
-			<label>OAuth2</label>
-			<items>
-				<input name="clientId" type="TextLine">
-					<label>Client ID</label>
-					<occurrences minimum="0" maximum="1"/>
-				</input>
-				<input name="clientSecret" type="TextLine">
-					<label>Client Secret</label>
+				<input name="account" type="TextLine">
+					<label>Account ID</label>
 					<occurrences minimum="0" maximum="1"/>
 				</input>
 			</items>

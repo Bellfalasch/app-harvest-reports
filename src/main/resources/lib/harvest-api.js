@@ -11,18 +11,23 @@ var conf = {
 
 exports.request = function(params){
 	var siteConfig = libs.portal.getSiteConfig();
+	conf.token = siteConfig.token;
 	conf.account = siteConfig.account;
-	conf.auth = libs.encoding.base64Encode(siteConfig.user + ':' + siteConfig.password);
 
 	var params = {
-		url: 'https://' + conf.account + '.harvestapp.com/' + params.endpoint + '',
+		url: 'https://api.harvestapp.com/v2/' + params.endpoint + '/',
 		method: 'GET',
 		headers: {
 			'Cache-Control': 'no-cache',
 			'Accept': conf.contentType,
-			'Content-Type': conf.contentType,
-			'Authorization': 'Basic ' + conf.auth
-		}
+			'Authorization': 'Bearer ' + conf.token,
+			'Harvest-Account-Id': conf.account,
+			'User-Agent': 'Enonic XP - App: Harvest report (alpha)',
+			'Content-Type': conf.contentType + '; charset=utf-8'
+		},
+		connectionTimeout: 5000,
+		readTimeout: 5000,
+		contentType: conf.contentType
 	};
 	log.info("REQUEST:");
 	libs.util.log(params);
