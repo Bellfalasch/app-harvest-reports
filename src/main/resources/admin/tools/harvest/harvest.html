@@ -85,12 +85,16 @@
 					</li>
 				</ul>
 
+				<hr />
+
 				<h2>Weekly report generator</h2>
 				<ul>
 					<li><strong>"Rules"</strong>: Weeks start on Mondays, end on Sundays. We follow <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO week date</a>.</li>
 					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow}" data-th-remove="tag" /></li>
 					<li><strong>Last week</strong>: <span data-th-text="${moment.weekLast}" data-th-remove="tag" /></li>
 				</ul>
+
+				<hr />
 
 				<h3>Report for week {#}</h3>
 				<p>Here's all the billable hours entered by our staff for projects that we track. Make sure they look ok before sending the reports.</p>
