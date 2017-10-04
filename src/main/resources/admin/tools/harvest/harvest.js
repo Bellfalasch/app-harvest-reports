@@ -18,7 +18,7 @@ exports.get = function(req) {
 	libs.moment().format();
 	log.info( libs.moment().isoWeek() );
 	var weekNow = libs.moment().isoWeek();
-	var weekLast = weekNow--;
+	var weekLast = weekNow - 1;
 
     var params = {
         adminUrl: adminUrl,
