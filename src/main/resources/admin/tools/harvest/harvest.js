@@ -37,6 +37,14 @@ exports.get = function(req) {
 	log.info("result:");
 	libs.util.log(result);
 
+	/*
+		TODO: time_entries needs some sorting/config!
+		* remove all items that does not bill the client (cost = 0)
+		* reverse-sort on date
+		* group on projects (sort on name)
+		* each group (project) needs to output its own table and data
+	*/
+
     var params = {
         adminUrl: adminUrl,
         assetsUrl: assetsUrl,
