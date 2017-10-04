@@ -26,23 +26,34 @@ exports.get = function(req) {
 		from: '2017-10-02',
 		to: '2017-10-09'
 	});
-	var entries = null;
+	var entries_raw = null;
+	var entries_done = [];
 	if (result != null) {
 		if (result.total_entries != null) {
 			if (result.total_entries > 0) {
-				entries = result.time_entries;
+				entries_raw = result.time_entries;
 			}
 		}
 	}
-	log.info("result:");
-	libs.util.log(result);
+//	log.info("result:");
+//	libs.util.log(result);
+
+	// Remove all entries that are not billable
+	// And reverse the order
+	for (var i = entries_raw.length - 1; i >= 0; i--) {
+		if ( !(entries_raw[i].billable == false || entries_raw[i].billable_rate == null) ) {
+			entries_done.push(entries_raw[i]);
+		}
+	}
 
 	/*
 		TODO: time_entries needs some sorting/config!
-		* remove all items that does not bill the client (cost = 0)
-		* reverse-sort on date
 		* group on projects (sort on name)
 		* each group (project) needs to output its own table and data
+		* Cost does not round properly, find out how Harvest (so we match!)
+			* or just omit cost in these reports
+		* Link to note if connected to zendesk?
+		* UI: Notification if timer is running
 	*/
 
     var params = {
@@ -54,7 +65,7 @@ exports.get = function(req) {
 			weekNow: weekNow.toString(),
 			weekLast: weekLast.toString()
 		},
-		time_entries: entries
+		time_entries: entries_done
     };
 
     return {

@@ -120,21 +120,10 @@
 					  </td>
 				      <td data-th-text="${entry.user.name}">{staff}</td>
 				      <td data-th-text="${entry.hours}">{hours}</td>
-				      <td data-th-text="${entry.billable_rate * entry.hours}">{cost}</td>
-				    </tr>
-				    <tr><!-- template -->
-				      <th scope="row">{date}</th>
-				      <td>{note}</td>
-				      <td>{staff}</td>
-				      <td>{hours}</td>
-				      <td>{cost}</td>
-				    </tr>
-				    <tr><!-- template -->
-				      <th scope="row">{date}</th>
-				      <td>{note}</td>
-				      <td>{staff}</td>
-				      <td>{hours}</td>
-				      <td>{cost}</td>
+					  <td>
+					      <strong data-th-text="${entry.billable_rate * entry.hours + ' NOK'}">{cost}</strong><br />
+					      <em data-th-text="${'At ' + entry.billable_rate + ' an hour'}">{price}</em>
+					  </td>
 				    </tr>
 				  </tbody>
 				</table>
