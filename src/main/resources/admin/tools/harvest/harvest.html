@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title data-th-text="${appName}"></title>
 
+	<link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/css/bootstrap.min.css'}">
+
     <!-- Common style and library used by the Launcher Panel -->
     <link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/common/styles/_all.css'}">
     <script type="text/javascript" data-th-src="${assetsUrl + '/common/lib/_all.js'}"></script>
@@ -11,17 +13,27 @@
     <!-- App bar style -->
     <link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/styles/toolstarter.css'}">
 
+	<script type="text/javascript" data-th-src="${assetsUrl + '/js/bootstrap.min.js'}" defer></script>
+
 	<link rel="icon" type="image/png" data-th-href="${assetsUrl + '/img/harvest-icon.png'}">
 </head>
 <body>
 
 <!-- App bar -->
+<!--
 <div class="app-bar">
     <div class="app-button">
         <img class="app-icon" data-th-src="${assetsUrl + '/img/harvest-icon.png'}"/>
         <span class="app-title" data-th-text="${appName}"></span>
     </div>
 </div>
+-->
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img data-th-src="${assetsUrl + '/img/harvest-icon.png'}" width="30" height="30" class="d-inline-block align-top" alt="">
+    <span class="app-title" data-th-text="${appName}" data-th-remove="tag"></span>
+  </a>
+</nav>
 
 <!-- Appends the Launcher Panel to the document body -->
 <script>
