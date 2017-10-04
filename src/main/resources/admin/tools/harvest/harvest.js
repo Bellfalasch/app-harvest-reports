@@ -2,7 +2,8 @@ var libs = {
 	portal: require('/lib/xp/portal'),
 	thymeleaf: require('/lib/xp/thymeleaf'),
 	moment: require("/lib/moment"),
-	harvest: require("/lib/harvest-api")
+	harvest: require("/lib/harvest-api"),
+	util: require("/lib/enonic/util")
 };
 
 var timestamp = Date.now();
@@ -23,9 +24,18 @@ exports.get = function(req) {
 
 	// Finally do some requests
 	var result = libs.harvest.time_entries({
-		from: '2017-10-02',
-		to: '2017-10-09'
+		from: '2017-10-02T00:00:00Z',
+		to: '2017-10-09T00:00:00Z'
 	});
+	var entries = null;
+	if (result != null) {
+		if (result.total_entries != null) {
+			if (result.total_entries > 0) {
+				entries = result.total_entries;
+			}
+		}
+	}
+	libs.util.log(result);
 
     var params = {
         adminUrl: adminUrl,
@@ -36,7 +46,7 @@ exports.get = function(req) {
 			weekNow: weekNow.toString(),
 			weekLast: weekLast.toString()
 		},
-		result: result
+		time_entries: entries
     };
 
     return {

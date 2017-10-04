@@ -108,7 +108,7 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr data-th-foreach="entry : ${result.time_entries}">
+				    <tr data-th-each="entry : ${time_entries}">
 				      <th scope="row" data-th-text="{entry.spent_date}">{date}</th>
 				      <td>
 						  <strong data-th-text="{entry.task.name}">{task}</strong>

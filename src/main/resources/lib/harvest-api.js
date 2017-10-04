@@ -8,14 +8,24 @@ var conf = {
 	contentType: 'application/json'
 };
 
+function jsonParamsToUrlParams(json) {
+	var url = '';
+	for (var prop in json) {
+		if (json[prop] != null) {
+			url += encodeURIComponent(prop) + '=' +
+				   encodeURIComponent(json[prop]) + '&';
+		}
+	}
+	return url.substring(0, url.length - 1)
+}
+
 function request(settings) {
-	var siteConfig = libs.portal.getSiteConfig();
-	conf.token = siteConfig.token;
-	conf.account = siteConfig.account;
+	conf.token = app.config["token"];
+	conf.account = app.config["account"];
 
 	var appendix = '?';
 	if (settings.params) {
-		appendix += JSON.stringify(settings.params,"=").replace(/g;/,"&");
+		appendix += jsonParamsToUrlParams(settings.params);
 	}
 	log.info(appendix);
 
@@ -35,9 +45,9 @@ function request(settings) {
 	log.info("REQUEST:");
 	libs.util.log(params);
 
-	log.info("RESPONSE:");
+//	log.info("RESPONSE:");
 	var response = libs.httpClient.request(params);
-	libs.util.log(response);
+//	libs.util.log(response);
 
 	log.info(response.status);
 	var json = null;
@@ -45,7 +55,7 @@ function request(settings) {
 		if (response.body !== null) {
 			json = response.body;
 			json = JSON.parse(json);
-			libs.util.log(json);
+//			libs.util.log(json);
 		}
 	}
 
