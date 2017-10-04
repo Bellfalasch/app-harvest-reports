@@ -113,23 +113,23 @@
 				  </thead>
 				  <tbody>
 				    <tr data-th-each="entry : ${time_entries}">
-				      <th scope="row" data-th-text="{entry.spent_date}">{date}</th>
+				      <th scope="row" data-th-text="${entry.spent_date}">{date}</th>
 				      <td>
-						  <strong data-th-text="{entry.task.name}">{task}</strong>
-						  <span data-th-text="{entry.notes}" data-th-remove="tag">{note}</span>
+						  <strong data-th-text="${entry.task.name}">{task}</strong><br />
+						  <span data-th-text="${entry.notes}" data-th-remove="tag">{note}</span>
 					  </td>
-				      <td data-th-text="{entry.user.name}">{staff}</td>
-				      <td data-th-text="{entry.hours}">{hours}</td>
-				      <td data-th-text="{entry.billable_rate * hours}">{cost}</td>
+				      <td data-th-text="${entry.user.name}">{staff}</td>
+				      <td data-th-text="${entry.hours}">{hours}</td>
+				      <td data-th-text="${entry.billable_rate * entry.hours}">{cost}</td>
 				    </tr>
-				    <tr>
+				    <tr><!-- template -->
 				      <th scope="row">{date}</th>
 				      <td>{note}</td>
 				      <td>{staff}</td>
 				      <td>{hours}</td>
 				      <td>{cost}</td>
 				    </tr>
-				    <tr>
+				    <tr><!-- template -->
 				      <th scope="row">{date}</th>
 				      <td>{note}</td>
 				      <td>{staff}</td>

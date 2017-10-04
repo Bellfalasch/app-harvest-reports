@@ -18,23 +18,23 @@ exports.get = function(req) {
 
 	// Initiate moment() and get this weeks number
 	libs.moment().format();
-	log.info( libs.moment().isoWeek() );
 	var weekNow = libs.moment().isoWeek();
 	var weekLast = weekNow - 1;
 
 	// Finally do some requests
 	var result = libs.harvest.time_entries({
-		from: '2017-10-02T00:00:00Z',
-		to: '2017-10-09T00:00:00Z'
+		from: '2017-10-02',
+		to: '2017-10-09'
 	});
 	var entries = null;
 	if (result != null) {
 		if (result.total_entries != null) {
 			if (result.total_entries > 0) {
-				entries = result.total_entries;
+				entries = result.time_entries;
 			}
 		}
 	}
+	log.info("result:");
 	libs.util.log(result);
 
     var params = {

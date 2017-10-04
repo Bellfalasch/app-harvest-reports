@@ -27,6 +27,7 @@ function request(settings) {
 	if (settings.params) {
 		appendix += jsonParamsToUrlParams(settings.params);
 	}
+	log.info("Appendix:");
 	log.info(appendix);
 
 	var params = {
@@ -37,47 +38,47 @@ function request(settings) {
 			'Harvest-Account-Id': conf.account,
 			'User-Agent': 'Enonic XP - App: Harvest report (alpha)'
 		},
-		connectionTimeout: 3000,
-		readTimeout: 3000,
+		connectionTimeout: 5000,
+		readTimeout: 5000,
 		contentType: conf.contentType
 	};
 
 	log.info("REQUEST:");
 	libs.util.log(params);
 
-//	log.info("RESPONSE:");
 	var response = libs.httpClient.request(params);
 //	libs.util.log(response);
 
-	log.info(response.status);
+	log.info("response.status: " + response.status);
 	var json = null;
 	if (response.status === 200) {
 		if (response.body !== null) {
 			json = response.body;
 			json = JSON.parse(json);
-//			libs.util.log(json);
+			log.info("RESPONSE:");
+			libs.util.log(json);
 		}
 	}
-
+	return json;
 }
 
 // We need to wrap functionality into services to be able to control access better since services exposes URL endpoints by default.
 exports.clients = function() {
-	request({
+	return request({
 		'endpoint': 'clients',
 		'params': {}
 	});
 };
 
 exports.contacts = function() {
-	request({
+	return request({
 		'endpoint': 'contacts',
 		'params': {}
 	});
 };
 
 exports.projects = function() {
-	request({
+	return request({
 		'endpoint': 'projects',
 		'params': {}
 	});
@@ -98,10 +99,10 @@ exports.time_entries = function(params) {
 		page: params.page || 1,
 		per_page: params.per_page || 100,
 	};
-	if (params) {
-		request({
-			'endpoint': 'time_entries',
-			'params': settings
-		});
-	}
+	log.info("var settings = ");
+	libs.util.log(settings);
+	return request({
+		'endpoint': 'time_entries',
+		'params': settings
+	});
 };
