@@ -16,7 +16,7 @@ exports.get = function(req) {
         adminUrl: adminUrl,
         assetsUrl: assetsUrl,
 		appId: 'harvest',
-        appName: 'Harvest'
+        appName: 'Harvest Report Tool'
     };
 
     return {
