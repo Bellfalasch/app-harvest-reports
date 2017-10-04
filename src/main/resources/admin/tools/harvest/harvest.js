@@ -1,6 +1,7 @@
 var libs = {
 	portal: require('/lib/xp/portal'),
-	thymeleaf: require('/lib/xp/thymeleaf')
+	thymeleaf: require('/lib/xp/thymeleaf'),
+	moment: require("/lib/moment-timezone")
 }
 
 var timestamp = Date.now();
