@@ -85,10 +85,11 @@
 					</li>
 				</ul>
 				<h2>Weekly report generator</h2>
-				<p>
-					<strong>This week</strong>: <span data-th-text="${moment.weekNow}" data-th-remove="tag" /><br />
-					<strong>Last week</strong>: <span data-th-text="${moment.weekLast}" data-th-remove="tag" />
-				</p>
+				<ul>
+					<li><strong>"Rules"</strong>: Weeks start on Mondays, end on Sundays. We follow <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO week date</a>.</li>
+					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow}" data-th-remove="tag" /></li>
+					<li><strong>Last week</strong>: <span data-th-text="${moment.weekLast}" data-th-remove="tag" /></li>
+				</ul>
 				<table class="table">
 				  <thead>
 				    <tr>
