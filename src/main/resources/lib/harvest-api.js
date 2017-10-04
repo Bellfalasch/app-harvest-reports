@@ -1,21 +1,26 @@
 var libs = {
 	portal: require('/lib/xp/portal'),
 	httpClient: require('/lib/http-client'),
-	util: require('/lib/enonic/util'),
-	encoding: require('/lib/text-encoding')
+	util: require('/lib/enonic/util')
 };
 
 var conf = {
 	contentType: 'application/json'
 };
 
-function request(params) {
+function request(settings) {
 	var siteConfig = libs.portal.getSiteConfig();
 	conf.token = siteConfig.token;
 	conf.account = siteConfig.account;
 
+	var appendix = '?';
+	if (settings.params) {
+		appendix += JSON.stringify(settings.params,"=").replace(/g;/,"&");
+	}
+	log.info(appendix);
+
 	var params = {
-		url: 'https://api.harvestapp.com/v2/' + params.endpoint + '/',
+		url: 'https://api.harvestapp.com/v2/' + settings.endpoint + appendix,
 		method: 'GET',
 		headers: {
 			'Authorization': 'Bearer ' + conf.token,
@@ -49,24 +54,44 @@ function request(params) {
 // We need to wrap functionality into services to be able to control access better since services exposes URL endpoints by default.
 exports.clients = function() {
 	request({
-		'endpoint': 'clients'
+		'endpoint': 'clients',
+		'params': {}
 	});
 };
 
 exports.contacts = function() {
 	request({
-		'endpoint': 'contacts'
+		'endpoint': 'contacts',
+		'params': {}
 	});
 };
 
 exports.projects = function() {
 	request({
-		'endpoint': 'projects'
+		'endpoint': 'projects',
+		'params': {}
 	});
 };
 
-exports.time_entries = function() {
-	request({
-		'endpoint': 'time_entries'
-	});
+// TIME ENTRIES
+// http://help.getharvest.com/api-v2/timesheets-api/timesheets/time-entries/
+exports.time_entries = function(params) {
+	// Safely take care of all incoming settings and set defaults, for use in current scope only
+	var settings = {
+		user_id: params.user_id || null,
+		client_id: params.client_id || null,
+		project_id: params.project_id || null,
+		is_billed: params.is_billed || null,
+		updated_since: params.updated_since || null,
+		from: params.from || null,
+		to: params.to || null,
+		page: params.page || 1,
+		per_page: params.per_page || 100,
+	};
+	if (params) {
+		request({
+			'endpoint': 'time_entries',
+			'params': settings
+		});
+	}
 };

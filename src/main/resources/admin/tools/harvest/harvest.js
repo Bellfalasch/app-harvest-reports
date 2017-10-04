@@ -1,7 +1,8 @@
 var libs = {
 	portal: require('/lib/xp/portal'),
 	thymeleaf: require('/lib/xp/thymeleaf'),
-	moment: require("/lib/moment")
+	moment: require("/lib/moment"),
+	harvest: require("/lib/harvest-api")
 };
 
 var timestamp = Date.now();
@@ -20,6 +21,12 @@ exports.get = function(req) {
 	var weekNow = libs.moment().isoWeek();
 	var weekLast = weekNow - 1;
 
+	// Finally do some requests
+	var result = libs.harvest.time_entries({
+		from: '2017-10-02',
+		to: '2017-10-09'
+	});
+
     var params = {
         adminUrl: adminUrl,
         assetsUrl: assetsUrl,
@@ -28,7 +35,8 @@ exports.get = function(req) {
 		moment: {
 			weekNow: weekNow.toString(),
 			weekLast: weekLast.toString()
-		}
+		},
+		result: result
     };
 
     return {

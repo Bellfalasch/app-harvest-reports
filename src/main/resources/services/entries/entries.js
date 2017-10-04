@@ -5,7 +5,7 @@ var libs = {
 };
 
 exports.get = function() {
-	libs.harvest.time_entries();
+	libs.harvest.time_entries({});
 	/*
 		http://help.getharvest.com/api-v2/timesheets-api/timesheets/time-entries/
 		In the response we'll get data (and name) on user, client, project, and task.

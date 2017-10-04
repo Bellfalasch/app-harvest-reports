@@ -93,24 +93,30 @@
 				</ul>
 
 				<h3>Report for week {#}</h3>
-				<h4>{Project}</h4>
+				<p>Here's all the billable hours entered by our staff for projects that we track. Make sure they look ok before sending the reports.</p>
+				<h4>{Client}</h4>
+				<h5>{Project}</h5>
+				<p>Timeframe: Week {#} ({from} - {to})</p>
 				<table class="table">
 				  <thead>
 				    <tr>
 				      <th>Date</th>
-				      <th>Note</th>
+				      <th>Task + Note</th>
 				      <th>Staff</th>
 				      <th>Hours</th>
 				      <th>Cost</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">{date}</th>
-				      <td>{note}</td>
-				      <td>{staff}</td>
-				      <td>{hours}</td>
-				      <td>{cost}</td>
+				    <tr data-th-foreach="entry : ${result.time_entries}">
+				      <th scope="row" data-th-text="{entry.spent_date}">{date}</th>
+				      <td>
+						  <strong data-th-text="{entry.task.name}">{task}</strong>
+						  <span data-th-text="{entry.notes}" data-th-remove="tag">{note}</span>
+					  </td>
+				      <td data-th-text="{entry.user.name}">{staff}</td>
+				      <td data-th-text="{entry.hours}">{hours}</td>
+				      <td data-th-text="{entry.billable_rate * hours}">{cost}</td>
 				    </tr>
 				    <tr>
 				      <th scope="row">{date}</th>
