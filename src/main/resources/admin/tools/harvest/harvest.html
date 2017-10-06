@@ -115,7 +115,7 @@
 				    <tr data-th-each="entry : ${time_entries}">
 				      <th scope="row" data-th-text="${entry.spent_date}">{date}</th>
 				      <td>
-						  <strong><small data-th-text="${entry.client.name + ': '}" /></strong>
+						  <small><strong data-th-text="${entry.client.name + ': '}" /></small>
 						  <small data-th-text="${entry.project.name}" /><br />
 						  <strong data-th-text="${entry.task.name}">{task}</strong> -
 						  <span data-th-text="${entry.notes}" data-th-remove="tag">{note}</span>
