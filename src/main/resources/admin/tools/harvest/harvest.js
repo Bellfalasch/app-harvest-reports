@@ -24,7 +24,7 @@ exports.get = function(req) {
 	// Finally do some requests
 	var result = libs.harvest.time_entries({
 		from: '2017-10-02',
-		to: '2017-10-09'
+		to: '2017-10-08'
 	});
 	var entries_raw = null;
 	var entries_done = [];
