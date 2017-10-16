@@ -55,8 +55,8 @@ function request(settings) {
 		if (response.body !== null) {
 			json = response.body;
 			json = JSON.parse(json);
-			log.info("RESPONSE:");
-			libs.util.log(json);
+//			log.info("RESPONSE:");
+//			libs.util.log(json);
 		}
 	}
 	return json;

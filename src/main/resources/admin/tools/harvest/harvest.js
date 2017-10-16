@@ -19,7 +19,7 @@ exports.get = function(req) {
 	// Initiate moment() and get this weeks number
 	libs.moment().format();
 	var weekNow = libs.moment().isoWeek();
-	var weekLast = weekNow - 1;
+	var weekLast = weekNow - 1; // TODO: unsafe, might yeild 0
 
 	// Finally do some requests
 	var result = libs.harvest.time_entries({
@@ -56,6 +56,8 @@ exports.get = function(req) {
 		* UI: Notification if timer is running
 	*/
 
+	log.info(libs.moment.duration().asWeeks(weekLast));
+
     var params = {
         adminUrl: adminUrl,
         assetsUrl: assetsUrl,
@@ -64,6 +66,10 @@ exports.get = function(req) {
 		moment: {
 			weekNow: weekNow.toString(),
 			weekLast: weekLast.toString()
+		},
+		report: {
+			from: libs.moment().week(weekLast).startOf('isoweek').format('YYYY-MM-DD'),
+			to: libs.moment().week(weekLast).endOf('isoweek').format('YYYY-MM-DD')
 		},
 		time_entries: entries_done
     };

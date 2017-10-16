@@ -91,7 +91,7 @@
 				<ul>
 					<li><strong>"Rules"</strong>: Weeks start on Mondays, end on Sundays. We follow <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO week date</a>.</li>
 					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow}" data-th-remove="tag" /></li>
-					<li><strong>Last week</strong>: <span data-th-text="${moment.weekLast}" data-th-remove="tag" /></li>
+					<li><strong>Last week</strong>: <span data-th-text="${moment.weekLast}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?from=' + report.from + '&amp;to=' + report.to}">generate report foundation</a>)</li>
 				</ul>
 
 				<hr />
