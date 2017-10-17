@@ -90,7 +90,7 @@
 				<h2>Weekly report generator</h2>
 				<ul>
 					<li><strong>"Rules"</strong>: Weeks start on Mondays, end on Sundays. We follow <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO week date</a>.</li>
-					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /></li>
+					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /> (<a href="">Go home</a>)</li>
 					<li><strong>Last week</strong>: <span data-th-text="${moment.weekLast.weekNumber}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?week=' + moment.weekLast.weekNumber + '&amp;from=' + moment.weekLast.weekBegin + '&amp;to=' + moment.weekLast.weekEnd}">generate report foundation</a>)</li>
 					<li><strong>Last week</strong>: <span data-th-text="${moment.weekBeforeLast.weekNumber}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">generate report foundation</a>)</li>
 				</ul>
@@ -137,11 +137,11 @@
 
 
 <!-- Appends the Launcher Panel to the document body -->
-<script>
+<script data-th-inline="javascript">
     var CONFIG = {
-        adminUrl: '{{adminUrl}}',
-		assetsUri: '{{assetsUri}}',
-        appId: '{{appId}}'
+        adminUrl: /*[[${adminUrl}]]*/ null,
+		assetsUri: /*[[${assetsUrl}]]*/ null,
+        appId: /*[[${appId}]]*/ null
     };
 </script>
 <script type="text/javascript" data-th-src="${assetsUrl} + '/apps/launcher/js/_all.js'" async></script>
