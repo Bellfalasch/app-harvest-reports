@@ -20,11 +20,16 @@ exports.get = function(req) {
 	libs.moment().format();
 	var weekNow  = libs.moment().isoWeek();
 	var weekLast = weekNow - 1; // TODO: unsafe, might yeild 0
+	var weekBeforeLast = weekNow - 2; // TODO: unsafe, might yeild -1 to 0
+	var weekNowBegin = libs.moment().startOf('isoweek').format('YYYY-MM-DD');
+	var weekNowEnd = libs.moment().endOf('isoweek').format('YYYY-MM-DD');
 	var weekLastBegin = libs.moment().week(weekLast).startOf('isoweek').format('YYYY-MM-DD');
 	var weekLastEnd   = libs.moment().week(weekLast).endOf('isoweek').format('YYYY-MM-DD');
+	var weekBeforeLastBegin = libs.moment().week(weekBeforeLast).startOf('isoweek').format('YYYY-MM-DD');
+	var weekBeforeLastEnd   = libs.moment().week(weekBeforeLast).endOf('isoweek').format('YYYY-MM-DD');
 
-	var dateSpanFrom = libs.moment().startOf('isoweek').format('YYYY-MM-DD');
-	var dateSpanTo  = libs.moment().endOf('isoweek').format('YYYY-MM-DD');
+	var dateSpanFrom = weekNowBegin;
+	var dateSpanTo = weekNowEnd;
 	if (req.params && req.params.from && req.params.to) {
 		dateSpanFrom = req.params.from;
 		dateSpanTo   = req.params.to;
@@ -73,12 +78,26 @@ exports.get = function(req) {
 		appId: 'harvest',
         appName: 'Harvest Report Tool',
 		moment: {
-			weekNow: weekNow.toString(),
-			weekLast: weekLast.toString()
+			weekNow: {
+				weekNumber: weekNow.toString(),
+				weekBegin: weekNowBegin,
+				weekEnd: weekNowEnd
+			},
+			weekLast: {
+				weekNumber: weekLast.toString(),
+				weekBegin: weekLastBegin,
+				weekEnd: weekLastEnd
+			},
+			weekBeforeLast: {
+				weekNumber: weekBeforeLast.toString(),
+				weekBegin: weekBeforeLastBegin,
+				weekEnd: weekBeforeLastEnd
+			}
 		},
 		report: {
 			from: weekLastBegin,
-			to: weekLastEnd
+			to: weekLastEnd,
+			heading1: (req.params && req.params.week) ? "Report for week " + req.params.week : "Default report"
 		},
 		time_entries: entries_done
     };
