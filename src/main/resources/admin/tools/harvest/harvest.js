@@ -16,15 +16,24 @@ exports.get = function(req) {
     var adminAssetsUrl = libs.portal.url({path: "/admin/assets/" + timestamp});
     var assetsUrl = libs.portal.assetUrl({path: ""});
 
-	// Initiate moment() and get this weeks number
+	// Initiate moment() and get this weeks number, spanning dates, and more.
 	libs.moment().format();
-	var weekNow = libs.moment().isoWeek();
+	var weekNow  = libs.moment().isoWeek();
 	var weekLast = weekNow - 1; // TODO: unsafe, might yeild 0
+	var weekLastBegin = libs.moment().week(weekLast).startOf('isoweek').format('YYYY-MM-DD');
+	var weekLastEnd   = libs.moment().week(weekLast).endOf('isoweek').format('YYYY-MM-DD');
+
+	var dateSpanFrom = libs.moment().startOf('isoweek').format('YYYY-MM-DD');
+	var dateSpanTo  = libs.moment().endOf('isoweek').format('YYYY-MM-DD');
+	if (req.params && req.params.from && req.params.to) {
+		dateSpanFrom = req.params.from;
+		dateSpanTo   = req.params.to;
+	}
 
 	// Finally do some requests
 	var result = libs.harvest.time_entries({
-		from: '2017-10-02',
-		to: '2017-10-08'
+		from: dateSpanFrom,
+		to: dateSpanTo
 	});
 	var entries_raw = null;
 	var entries_done = [];
@@ -68,8 +77,8 @@ exports.get = function(req) {
 			weekLast: weekLast.toString()
 		},
 		report: {
-			from: libs.moment().week(weekLast).startOf('isoweek').format('YYYY-MM-DD'),
-			to: libs.moment().week(weekLast).endOf('isoweek').format('YYYY-MM-DD')
+			from: weekLastBegin,
+			to: weekLastEnd
 		},
 		time_entries: entries_done
     };
