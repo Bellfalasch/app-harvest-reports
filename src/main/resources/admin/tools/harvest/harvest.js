@@ -3,7 +3,8 @@ var libs = {
 	thymeleaf: require('/lib/xp/thymeleaf'),
 	moment: require("/lib/moment"),
 	harvest: require("/lib/harvest-api"),
-	util: require("/lib/enonic/util")
+	util: require("/lib/enonic/util"),
+	admin: require('/lib/xp/admin')
 };
 
 var timestamp = Date.now();
@@ -11,9 +12,12 @@ var view = resolve('harvest.html');
 
 exports.get = function(req) {
 
-    // Variables required by the Launcher Panel
-    var adminUrl = libs.portal.url({path: '/admin'})
-    var adminAssetsUrl = libs.portal.url({path: "/admin/assets/" + timestamp});
+	// Variables required by the Launcher Panel and other tool-specific things.
+	var baseHref = libs.portal.pageUrl({
+	    path: '',
+	    type: 'absolute'
+	});
+	var adminUrl = libs.admin.getBaseUri();
     var assetsUrl = libs.portal.assetUrl({path: ""});
 
 	// Initiate moment() and get this weeks number, spanning dates, and more.
@@ -73,10 +77,15 @@ exports.get = function(req) {
 	log.info(libs.moment.duration().asWeeks(weekLast));
 
     var params = {
-        adminUrl: adminUrl,
+		baseHref: baseHref,
+		adminUrl: adminUrl,
         assetsUrl: assetsUrl,
 		appId: 'harvest',
         appName: 'Harvest Report Tool',
+		launcherUrl: libs.portal.assetUrl({
+            path: '/js/launcher',
+            application: 'com.enonic.xp.app.main'
+        }),
 		moment: {
 			weekNow: {
 				weekNumber: weekNow.toString(),

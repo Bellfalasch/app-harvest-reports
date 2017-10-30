@@ -2,17 +2,21 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title data-th-text="${appName}"></title>
+	<base data-th-href="${baseHref}">
 
+    <title data-th-text="${appName}"></title>
 	<link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/css/bootstrap.min.css'}">
 
-    <!-- Common style and library used by the Launcher Panel -->
-    <link rel="stylesheet" type="text/css" data-th-href="${adminAssetsUrl + '/common/styles/_all.css'}">
-    <script type="text/javascript" data-th-src="${adminAssetsUrl + '/common/lib/_all.js'}"></script>
+    <!-- Common style used by the Launcher Panel -->
+    <link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/admin/common/styles/_all.css'}">
+
+	<!-- Append the Admin libraries -->
+    <script type="text/javascript" data-th-src="${assetsUrl + '/admin/common/lib/_all.js'}"></script>
 
     <!-- App bar style -->
-    <link rel="stylesheet" type="text/css" data-th-href="${adminAssetsUrl + '/styles/toolstarter.css'}">
+    <link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/styles/toolstarter.css'}">
 
+	<script type="text/javascript" data-th-src="${assetsUrl + '/js/jquery.min.js'}" defer></script>
 	<script type="text/javascript" data-th-src="${assetsUrl + '/js/bootstrap.min.js'}" defer></script>
 
 	<link rel="icon" type="image/png" data-th-href="${assetsUrl + '/img/harvest-icon.png'}">
@@ -90,7 +94,7 @@
 				<h2>Weekly report generator</h2>
 				<ul>
 					<li><strong>"Rules"</strong>: Weeks start on Mondays, end on Sundays. We follow <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO week date</a>.</li>
-					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /> (<a href="">Go home</a>)</li>
+					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /> (<a href="/">Go home</a>)</li>
 					<li><strong>Last week</strong>: <span data-th-text="${moment.weekLast.weekNumber}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?week=' + moment.weekLast.weekNumber + '&amp;from=' + moment.weekLast.weekBegin + '&amp;to=' + moment.weekLast.weekEnd}">generate report foundation</a>)</li>
 					<li><strong>Last week</strong>: <span data-th-text="${moment.weekBeforeLast.weekNumber}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">generate report foundation</a>)</li>
 				</ul>
@@ -144,6 +148,12 @@
         appId: /*[[${appId}]]*/ null
     };
 </script>
-<script type="text/javascript" data-th-src="${assetsUrl} + '/apps/launcher/js/_all.js'" async></script>
+
+<!-- Append the Admin UI -->
+<script type="text/javascript" data-th-src="${assetsUrl + '/admin/common/js/_all.js'}"></script>
+
+<!-- Append the launcher -->
+<script type="text/javascript" data-th-src="${launcherUrl + '/bundle.js'}" async></script>
+
 </body>
 </html>

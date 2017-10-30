@@ -1,5 +1,6 @@
-.gradle
-/build/
+.DS_Store
+.gradle/
+build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -12,3 +13,22 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+temp/
+temp/*.*
+target/
+node_modules/
+*.iws
+*.ids
+*.iml
+
+npm-debug.log
+.tscache
+.tab
+.tmp
+generated-java
+classes/
+out/
+.xp/
+.idea
+.sass-cache
