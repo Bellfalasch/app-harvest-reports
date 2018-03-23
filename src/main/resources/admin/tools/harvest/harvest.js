@@ -23,7 +23,7 @@ exports.get = function(req) {
 	// Initiate moment() and get this weeks number, spanning dates, and more.
 	libs.moment().format();
 	var weekNow  = libs.moment().isoWeek();
-	var weekLast = weekNow - 1; // TODO: unsafe, might yeild 0
+	var weekLast = weekNow; // TODO: unsafe, might yeild 0
 	var weekBeforeLast = weekNow - 2; // TODO: unsafe, might yeild -1 to 0
 	var weekNowBegin = libs.moment().startOf('isoweek').format('YYYY-MM-DD');
 	var weekNowEnd = libs.moment().endOf('isoweek').format('YYYY-MM-DD');
@@ -63,6 +63,7 @@ exports.get = function(req) {
 		if ( !(entries_raw[i].billable == false || entries_raw[i].billable_rate == null) ) {
 			entries_raw[i].spent_dateWeekdayName = libs.moment(entries_raw[i].spent_date).format('dddd');
 			entries_raw[i].fullCost = Math.round(entries_raw[i].billable_rate * entries_raw[i].hours);
+			entries_raw[i].notes = entries_raw[i].notes || 'N/A';
 			entries_done.push(entries_raw[i]);
 		}
 	}
@@ -107,10 +108,8 @@ exports.get = function(req) {
 	});
 
 	/*
-		TODO: time_entries needs some sorting/config!
-		* group on projects (sort on name)
-		* each group (project) needs to output its own table and data
-		* Cost does not round properly, find out how Harvest (so we match!)
+		TODO:
+		* Cost does not round properly, find out how Harvest does it (so we match!)
 			* or just omit cost in these reports
 		* Link to note if connected to zendesk?
 		* UI: Notification if timer is running

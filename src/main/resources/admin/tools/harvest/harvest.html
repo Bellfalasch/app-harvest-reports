@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-	<base data-th-href="${baseHref}">
-
+    <base data-th-href="${baseHref}">
     <title data-th-text="${appName}"></title>
-	<link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/css/bootstrap.min.css'}">
 
     <!-- Common style used by the Launcher Panel -->
     <link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/admin/common/styles/_all.css'}">
+
+	 <link rel="stylesheet" type="text/css" data-th-href="${assetsUrl + '/css/bootstrap.min.css'}">
 
 	<!-- Append the Admin libraries -->
     <script type="text/javascript" data-th-src="${assetsUrl + '/admin/common/lib/_all.js'}"></script>
@@ -142,12 +142,9 @@
 					<h5 data-th-text="${project.header.project}">{Project}</h5>
 					<p>
 						Timeframe:
-						Week <span data-th-text="${report.forWeek}">{#}</span>
-						(
-						<span data-th-text="${report.from}">{from}</span>
-						-
-						<span data-th-text="${report.to}">{to}</span>
-						)
+						Week <strong data-th-text="${report.forWeek}">{#}</strong>
+						<em>(<span data-th-text="${report.from}">{from}</span> through
+						<span data-th-text="${report.to}">{to}</span>)</em>
 					</p>
 					<table class="table">
 					  <thead>
