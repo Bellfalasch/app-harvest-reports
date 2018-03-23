@@ -108,7 +108,7 @@
 				      <div class="card-body">
 				        <h5 class="card-title">This week</h5>
 				        <p class="card-text">Today's week number is <strong><span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /></strong>. This report is generated on tool's root (home).</p>
-				        <a href="/" class="btn btn-primary btn-sm" data-th-href="${thisToolUrl}">generate report</a>
+				        <a href="/" class="btn btn-primary btn-sm" data-th-href="${thisToolUrl}">Generate report</a>
 				      </div>
 				    </div>
 				  </div>
@@ -117,7 +117,7 @@
 				      <div class="card-body">
 				        <h5 class="card-title">Last week</h5>
 				        <p class="card-text">Week number: <strong><span data-th-text="${moment.weekLast.weekNumber}" data-th-remove="tag" /></strong></p>
-				        <a href="#" class="btn btn-primary btn-sm" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">generate report</a>
+				        <a href="#" class="btn btn-primary btn-sm" data-th-href="${'?week=' + moment.weekLast.weekNumber + '&amp;from=' + moment.weekLast.weekBegin + '&amp;to=' + moment.weekLast.weekEnd}">Generate report</a>
 				      </div>
 				    </div>
 				  </div>
@@ -126,7 +126,7 @@
 				      <div class="card-body">
 				        <h5 class="card-title">Week before last</h5>
 				        <p class="card-text">Week number: <strong><span data-th-text="${moment.weekBeforeLast.weekNumber}" data-th-remove="tag" /></strong></p>
-				        <a href="#" class="btn btn-primary btn-sm" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">generate report</a>
+				        <a href="#" class="btn btn-primary btn-sm" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">Generate report</a>
 				      </div>
 				    </div>
 				  </div>
