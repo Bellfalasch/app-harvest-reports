@@ -23,7 +23,7 @@ exports.get = function(req) {
 	// Initiate moment() and get this weeks number, spanning dates, and more.
 	libs.moment().format();
 	var weekNow  = libs.moment().isoWeek();
-	var weekLast = weekNow; // TODO: unsafe, might yeild 0
+	var weekLast = weekNow - 1; // TODO: unsafe, might yeild 0
 	var weekBeforeLast = weekNow - 2; // TODO: unsafe, might yeild -1 to 0
 	var weekNowBegin = libs.moment().startOf('isoweek').format('YYYY-MM-DD');
 	var weekNowEnd = libs.moment().endOf('isoweek').format('YYYY-MM-DD');
@@ -113,6 +113,7 @@ exports.get = function(req) {
 			* or just omit cost in these reports
 		* Link to note if connected to zendesk?
 		* UI: Notification if timer is running
+		* Do a sum/total per project at the end of each table
 	*/
 
 	log.info(libs.moment.duration().asWeeks(weekLast));

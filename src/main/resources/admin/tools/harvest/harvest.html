@@ -151,31 +151,31 @@
 					    <tr>
 					      <th>Date</th>
 					      <th>Task + Note</th>
-					      <th>Staff</th>
+					      <th>Staff member</th>
 					      <th>Hours</th>
 					      <th>Cost</th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					    <tr data-th-each="entry : ${project.items}">
-					      <th scope="row">
+					      <th scope="row" style="white-space: nowrap;">
 								<span data-th-text="${entry.spent_date}">{date}</span><br />
 								<small data-th-text="${entry.spent_dateWeekdayName}">{weekdayname}</small>
 							</th>
-					      <td>
+							<td>
 							  <strong data-th-text="${entry.task.name}">{task}</strong> -
 							  <span data-th-text="${entry.notes}" data-th-remove="tag">{note}</span>
-						  </td>
-					      <td data-th-text="${entry.user.name}">{staff}</td>
-					      <td data-th-text="${entry.hours}">{hours}</td>
-						  <td>
+							</td>
+							<td data-th-text="${entry.user.name}" style="white-space: nowrap;">{staff}</td>
+							<td data-th-text="${entry.hours}" style="white-space: nowrap;">{hours}</td>
+							<td style="white-space: nowrap;">
 						      <strong data-th-text="${entry.fullCost + ' NOK'}">{cost}</strong><br />
 						      <small data-th-text="${'At ' + entry.billable_rate + ' per hour'}">{price}</small>
-						  </td>
-					    </tr>
-					  </tbody>
-					  <tfoot>
-						  <tr>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
 							  <td colspan="5"><p><small><em>All costs are in NOK, without vat/mva.</em></small></p></td>
 						  </tr>
 					  </tfoot>
