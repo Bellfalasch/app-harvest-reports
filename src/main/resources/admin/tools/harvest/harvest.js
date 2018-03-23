@@ -23,7 +23,7 @@ exports.get = function(req) {
 	// Initiate moment() and get this weeks number, spanning dates, and more.
 	libs.moment().format();
 	var weekNow  = libs.moment().isoWeek();
-	var weekLast = weekNow - 1; // TODO: unsafe, might yeild 0
+	var weekLast = weekNow -  1; // TODO: unsafe, might yeild 0
 	var weekBeforeLast = weekNow - 2; // TODO: unsafe, might yeild -1 to 0
 	var weekNowBegin = libs.moment().startOf('isoweek').format('YYYY-MM-DD');
 	var weekNowEnd = libs.moment().endOf('isoweek').format('YYYY-MM-DD');
@@ -108,12 +108,21 @@ exports.get = function(req) {
 	});
 
 	/*
-		TODO:
+		TODO: reports
 		* Cost does not round properly, find out how Harvest does it (so we match!)
 			* or just omit cost in these reports
-		* Link to note if connected to zendesk?
+		* Link the notes that are connected to zendesk?
 		* UI: Notification if timer is running
 		* Do a sum/total per project at the end of each table
+	*/
+
+	/*
+		TODO: send reports
+		* Decide where to get client/customer email data (project notes or client staff-data?).
+		* Output/collect email addresses that will get the report.
+		* Generate hard-coded email template in English.
+		* Inject project specific table over time entries into email template.
+		* Send the email template (bcc to me?).
 	*/
 
 	log.info(libs.moment.duration().asWeeks(weekLast));
