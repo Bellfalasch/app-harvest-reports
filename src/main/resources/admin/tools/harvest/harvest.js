@@ -93,6 +93,19 @@ exports.get = function(req) {
 	var entries_by_project = organise(entries_done);
 	//libs.util.log(entries_by_project);
 
+	// Sort the array of projects based on client name.
+	entries_by_project.sort( function(a,b) {
+		var nameA = a.header.client.toUpperCase();
+		var nameB = b.header.client.toUpperCase();
+		if (nameA < nameB) {
+			return -1;
+		}
+		if (nameA > nameB) {
+			return 1;
+		}
+		return 0;
+	});
+
 	/*
 		TODO: time_entries needs some sorting/config!
 		* group on projects (sort on name)
