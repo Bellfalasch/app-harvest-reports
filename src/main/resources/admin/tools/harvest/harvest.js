@@ -1,10 +1,10 @@
 var libs = {
 	portal: require('/lib/xp/portal'),
 	thymeleaf: require('/lib/xp/thymeleaf'),
-	moment: require("/lib/moment"),
 	harvest: require("/lib/harvest-api"),
 	util: require("/lib/enonic/util"),
-	admin: require('/lib/xp/admin')
+	admin: require('/lib/xp/admin'),
+	moment: require('/assets/momentjs/2.21.0/min/moment-with-locales.min.js')
 };
 
 var timestamp = Date.now();
