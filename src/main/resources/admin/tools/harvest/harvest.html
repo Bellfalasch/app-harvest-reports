@@ -99,12 +99,38 @@
 				<hr />
 
 				<h2>Weekly report generator</h2>
-				<ul>
-					<li><strong>"Rules"</strong>: Weeks start on Mondays, end on Sundays. We follow <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO week date</a>.</li>
-					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /> (<a href="/" data-th-href="${thisToolUrl}">Go home</a>)</li>
-					<li><strong>Last week</strong>: <span data-th-text="${moment.weekLast.weekNumber}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?week=' + moment.weekLast.weekNumber + '&amp;from=' + moment.weekLast.weekBegin + '&amp;to=' + moment.weekLast.weekEnd}">generate report foundation</a>)</li>
-					<li><strong>Last week</strong>: <span data-th-text="${moment.weekBeforeLast.weekNumber}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">generate report foundation</a>)</li>
-				</ul>
+				<p>
+					<strong>"Rules"</strong>: Weeks start on Mondays, end on Sundays. We follow <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO week date</a>.
+				</p>
+				<div class="row">
+				  <div class="col-sm-4">
+				    <div class="card text-center">
+				      <div class="card-body">
+				        <h5 class="card-title">This week</h5>
+				        <p class="card-text">Today's week number is <strong><span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /></strong>. This report is generated on tool's root (home).</p>
+				        <a href="/" class="btn btn-primary btn-sm" data-th-href="${thisToolUrl}">generate report</a>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="col-sm-4">
+				    <div class="card text-center">
+				      <div class="card-body">
+				        <h5 class="card-title">Last week</h5>
+				        <p class="card-text">Week number: <strong><span data-th-text="${moment.weekLast.weekNumber}" data-th-remove="tag" /></strong></p>
+				        <a href="#" class="btn btn-primary btn-sm" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">generate report</a>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="col-sm-4">
+				    <div class="card text-center">
+				      <div class="card-body">
+				        <h5 class="card-title">Week before last</h5>
+				        <p class="card-text">Week number: <strong><span data-th-text="${moment.weekBeforeLast.weekNumber}" data-th-remove="tag" /></strong></p>
+				        <a href="#" class="btn btn-primary btn-sm" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">generate report</a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 
 				<hr />
 
