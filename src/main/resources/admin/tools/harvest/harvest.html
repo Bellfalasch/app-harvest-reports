@@ -151,8 +151,8 @@
 <script data-th-inline="javascript">
     var CONFIG = {
         adminUrl: /*[[${adminUrl}]]*/ null,
-		assetsUri: /*[[${assetsUrl}]]*/ null,
-        appId: /*[[${appId}]]*/ null
+		  appId: /*[[${appId}]]*/ null,
+		  launcherUrl: /*[[${launcherUrl}]]*/ null
     };
 </script>
 
@@ -160,7 +160,7 @@
 <script type="text/javascript" data-th-src="${assetsUrl + '/admin/common/js/_all.js'}"></script>
 
 <!-- Append the launcher -->
-<script type="text/javascript" data-th-src="${launcherUrl + '/bundle.js'}" async></script>
+<script type="text/javascript" data-th-src="${launcherPath}" async></script>
 
 </body>
 </html>

@@ -64,6 +64,29 @@ exports.get = function(req) {
 		}
 	}
 
+	function organise(arr) {
+	    var headers = [], // an Array to let us lookup indicies by group
+	        objs = [],    // the Object we want to create
+	        i, j;
+	    for (i = 0; i < arr.length; ++i) {
+	        j = headers.indexOf(arr[i].project.name); // lookup
+	        if (j === -1) { // this entry does not exist yet, init
+	            j = headers.length;
+	            headers[j] = arr[i].project.name;
+	            objs[j] = {};
+	            objs[j].header = arr[i].project.name;
+	            objs[j].items = [];
+	        }
+	        objs[j].items.push( // create clone
+	            arr[i]
+	        );
+	    }
+	    return objs;
+	}
+
+	var first_copy = organise(entries_done);
+	libs.util.log(first_copy);
+
 	/*
 		TODO: time_entries needs some sorting/config!
 		* group on projects (sort on name)
@@ -82,10 +105,8 @@ exports.get = function(req) {
         assetsUrl: assetsUrl,
 		appId: 'harvest',
         appName: 'Harvest Report Tool',
-		launcherUrl: libs.portal.assetUrl({
-            path: '/js/launcher',
-            application: 'com.enonic.xp.app.main'
-        }),
+		launcherPath: libs.admin.getLauncherPath(),
+		launcherUrl: libs.admin.getLauncherUrl(),
 		moment: {
 			weekNow: {
 				weekNumber: weekNow.toString(),
