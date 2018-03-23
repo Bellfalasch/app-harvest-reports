@@ -101,7 +101,7 @@
 				<h2>Weekly report generator</h2>
 				<ul>
 					<li><strong>"Rules"</strong>: Weeks start on Mondays, end on Sundays. We follow <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO week date</a>.</li>
-					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /> (<a href="/">Go home</a>)</li>
+					<li><strong>This week</strong>: <span data-th-text="${moment.weekNow.weekNumber}" data-th-remove="tag" /> (<a href="/" data-th-href="${thisToolUrl}">Go home</a>)</li>
 					<li><strong>Last week</strong>: <span data-th-text="${moment.weekLast.weekNumber}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?week=' + moment.weekLast.weekNumber + '&amp;from=' + moment.weekLast.weekBegin + '&amp;to=' + moment.weekLast.weekEnd}">generate report foundation</a>)</li>
 					<li><strong>Last week</strong>: <span data-th-text="${moment.weekBeforeLast.weekNumber}" data-th-remove="tag" /> (<a href="#" data-th-href="${'?week=' + moment.weekBeforeLast.weekNumber + '&amp;from=' + moment.weekBeforeLast.weekBegin + '&amp;to=' + moment.weekBeforeLast.weekEnd}">generate report foundation</a>)</li>
 				</ul>
@@ -110,37 +110,41 @@
 
 				<h3 data-th-text="${report.heading1}">Report for week {#}</h3>
 				<p>Here's all the billable hours entered by our staff for projects that we track. Make sure they look ok before sending the reports.</p>
-				<h4>{Client}</h4>
-				<h5>{Project}</h5>
-				<p>Timeframe: Week {#} ({from} - {to})</p>
-				<table class="table">
-				  <thead>
-				    <tr>
-				      <th>Date</th>
-				      <th>Task + Note</th>
-				      <th>Staff</th>
-				      <th>Hours</th>
-				      <th>Cost</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr data-th-each="entry : ${time_entries}">
-				      <th scope="row" data-th-text="${entry.spent_date}">{date}</th>
-				      <td>
-						  <small><strong data-th-text="${entry.client.name + ': '}" /></small>
-						  <small data-th-text="${entry.project.name}" /><br />
-						  <strong data-th-text="${entry.task.name}">{task}</strong> -
-						  <span data-th-text="${entry.notes}" data-th-remove="tag">{note}</span>
-					  </td>
-				      <td data-th-text="${entry.user.name}">{staff}</td>
-				      <td data-th-text="${entry.hours}">{hours}</td>
-					  <td>
-					      <strong data-th-text="${entry.billable_rate * entry.hours + ' NOK'}">{cost}</strong><br />
-					      <em data-th-text="${'At ' + entry.billable_rate + ' an hour'}">{price}</em>
-					  </td>
-				    </tr>
-				  </tbody>
-				</table>
+
+				<div data-th-each="project : ${time_entries}" data-th-remove="tag">
+					<h4 data-th-text="${project.header.client}">{Client}</h4>
+					<h5 data-th-text="${project.header.project}">{Project}</h5>
+					<p>Timeframe: Week {#} ({from} - {to})</p>
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th>Date</th>
+					      <th>Task + Note</th>
+					      <th>Staff</th>
+					      <th>Hours</th>
+					      <th>Cost</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr data-th-each="entry : ${project.items}">
+					      <th scope="row" data-th-text="${entry.spent_date}">{date}</th>
+					      <td>
+							  <small><strong data-th-text="${entry.client.name + ': '}" /></small>
+							  <small data-th-text="${entry.project.name}" /><br />
+							  <strong data-th-text="${entry.task.name}">{task}</strong> -
+							  <span data-th-text="${entry.notes}" data-th-remove="tag">{note}</span>
+						  </td>
+					      <td data-th-text="${entry.user.name}">{staff}</td>
+					      <td data-th-text="${entry.hours}">{hours}</td>
+						  <td>
+						      <strong data-th-text="${entry.billable_rate * entry.hours + ' NOK'}">{cost}</strong><br />
+						      <em data-th-text="${'At ' + entry.billable_rate + ' an hour'}">{price}</em>
+						  </td>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+
 			</article>
 		</div>
 	</div>

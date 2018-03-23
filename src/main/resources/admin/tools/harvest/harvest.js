@@ -74,7 +74,10 @@ exports.get = function(req) {
 	            j = headers.length;
 	            headers[j] = arr[i].project.name;
 	            objs[j] = {};
-	            objs[j].header = arr[i].project.name;
+	            objs[j].header = {
+						project: arr[i].project.name,
+						client: arr[i].client.name
+					};
 	            objs[j].items = [];
 	        }
 	        objs[j].items.push( // create clone
@@ -84,8 +87,8 @@ exports.get = function(req) {
 	    return objs;
 	}
 
-	var first_copy = organise(entries_done);
-	libs.util.log(first_copy);
+	var entries_by_project = organise(entries_done);
+	//libs.util.log(entries_by_project);
 
 	/*
 		TODO: time_entries needs some sorting/config!
@@ -102,9 +105,10 @@ exports.get = function(req) {
     var params = {
 		baseHref: baseHref,
 		adminUrl: adminUrl,
-        assetsUrl: assetsUrl,
+		assetsUrl: assetsUrl,
+		thisToolUrl: libs.admin.getToolUrl(app.name, 'harvest'),
 		appId: 'harvest',
-        appName: 'Harvest Report Tool',
+		appName: 'Harvest Report Tool',
 		launcherPath: libs.admin.getLauncherPath(),
 		launcherUrl: libs.admin.getLauncherUrl(),
 		moment: {
@@ -129,7 +133,7 @@ exports.get = function(req) {
 			to: weekLastEnd,
 			heading1: (req.params && req.params.week) ? "Report for week " + req.params.week : "Default report"
 		},
-		time_entries: entries_done
+		time_entries: entries_by_project//entries_done
     };
 
     return {
