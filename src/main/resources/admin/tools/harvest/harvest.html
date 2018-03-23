@@ -140,7 +140,15 @@
 				<div data-th-each="project : ${time_entries}" data-th-remove="tag">
 					<h4 data-th-text="${project.header.client}">{Client}</h4>
 					<h5 data-th-text="${project.header.project}">{Project}</h5>
-					<p>Timeframe: Week {#} ({from} - {to})</p>
+					<p>
+						Timeframe:
+						Week <span data-th-text="${report.forWeek}">{#}</span>
+						(
+						<span data-th-text="${report.from}">{from}</span>
+						-
+						<span data-th-text="${report.to}">{to}</span>
+						)
+					</p>
 					<table class="table">
 					  <thead>
 					    <tr>
@@ -153,21 +161,27 @@
 					  </thead>
 					  <tbody>
 					    <tr data-th-each="entry : ${project.items}">
-					      <th scope="row" data-th-text="${entry.spent_date}">{date}</th>
+					      <th scope="row">
+								<span data-th-text="${entry.spent_date}">{date}</span><br />
+								<small data-th-text="${entry.spent_dateWeekdayName}">{wekdayname}</small>
+							</th>
 					      <td>
-							  <small><strong data-th-text="${entry.client.name + ': '}" /></small>
-							  <small data-th-text="${entry.project.name}" /><br />
 							  <strong data-th-text="${entry.task.name}">{task}</strong> -
 							  <span data-th-text="${entry.notes}" data-th-remove="tag">{note}</span>
 						  </td>
 					      <td data-th-text="${entry.user.name}">{staff}</td>
 					      <td data-th-text="${entry.hours}">{hours}</td>
 						  <td>
-						      <strong data-th-text="${entry.billable_rate * entry.hours + ' NOK'}">{cost}</strong><br />
-						      <em data-th-text="${'At ' + entry.billable_rate + ' an hour'}">{price}</em>
+						      <strong data-th-text="${entry.fullCost + ' NOK'}">{cost}</strong><br />
+						      <small data-th-text="${'At ' + entry.billable_rate + ' per hour'}">{price}</small>
 						  </td>
 					    </tr>
 					  </tbody>
+					  <tfoot>
+						  <tr>
+							  <td colspan="5"><p><small><em>All costs are in NOK, without vat/mva.</em></small></p></td>
+						  </tr>
+					  </tfoot>
 					</table>
 				</div>
 

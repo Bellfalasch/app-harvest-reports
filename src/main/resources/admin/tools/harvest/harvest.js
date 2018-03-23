@@ -58,8 +58,11 @@ exports.get = function(req) {
 
 	// Remove all entries that are not billable
 	// And reverse the order
+	// And calculate name of weekday
 	for (var i = entries_raw.length - 1; i >= 0; i--) {
 		if ( !(entries_raw[i].billable == false || entries_raw[i].billable_rate == null) ) {
+			entries_raw[i].spent_dateWeekdayName = libs.moment(entries_raw[i].spent_date).format('dddd');
+			entries_raw[i].fullCost = Math.round(entries_raw[i].billable_rate * entries_raw[i].hours);
 			entries_done.push(entries_raw[i]);
 		}
 	}
@@ -129,9 +132,10 @@ exports.get = function(req) {
 			}
 		},
 		report: {
-			from: weekLastBegin,
-			to: weekLastEnd,
-			heading1: (req.params && req.params.week) ? "Report for week " + req.params.week : "Default report"
+			from: dateSpanFrom,
+			to: dateSpanTo,
+			forWeek: (req.params && req.params.week) ? req.params.week : weekNow,
+			heading1: (req.params && req.params.week) ? "Report for week " + req.params.week : "Report for week " + weekNow
 		},
 		time_entries: entries_by_project//entries_done
     };
