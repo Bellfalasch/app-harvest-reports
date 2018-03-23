@@ -52,10 +52,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#" data-th-href="${thisToolUrl}">Generate <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Time entities</a>
+        <a class="nav-link" href="#" data-th-href="${thisToolUrl}">Reports <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Projects</a>
@@ -76,9 +73,9 @@
 			<article class="cols-12">
 				<h1>
 					<span data-th-text="${appName}" data-th-remove="tag"></span>
-					<small>A tool for creating and sending reports to customers</small>
+					<small class="text-muted">Creating and sending weekly time reports</small>
 				</h1>
-				<p>
+				<p class="lead">
 					Random text, lorem ipsum doler sit amet.
 				</p>
 				<p>
@@ -86,7 +83,7 @@
 				</p>
 				<ul class="nav">
 					<li class="nav-item">
-						<a class="nav-link active" href="#">Select report date range</a>
+						<a class="nav-link active" href="#" data-th-href="${thisToolUrl}">Select report date range</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link disabled" href="#">Create email templates</a>
