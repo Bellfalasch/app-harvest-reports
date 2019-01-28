@@ -4,7 +4,8 @@ var libs = {
 	harvest: require("/lib/harvest-api"),
 	util: require("/lib/enonic/util"),
 	admin: require('/lib/xp/admin'),
-	moment: require('/assets/momentjs/2.21.0/min/moment-with-locales.min.js')
+	moment: require('/assets/momentjs/2.21.0/min/moment-with-locales.min.js'),
+	appersist: require('/lib/openxp/appersist')
 };
 
 var timestamp = Date.now();
@@ -106,7 +107,22 @@ exports.get = function(req) {
 		}
 		return 0;
 	});
+/*
+	var repon = libs.appersist.repository.getConnection({repository:'test', branch:'master'});
+	repon.create({
+		favouriteFish: 'Rubarb',
+		otherDetails: 'Additional things',
+		openWindow: true,
+		digits: 57,
+		highValues: 400245350,
+		html: '<strong>Nice!</strong>'
+	});
 
+	repon.create({
+		openWindow: false,
+		digits: 10
+	});
+*/
 	/*
 		TODO: reports
 		* Cost does not round properly, find out how Harvest does it (so we match!)
